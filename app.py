@@ -5,7 +5,8 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 
 app = Flask(__name__)
 
-DB_PATH = os.path.join(os.path.dirname(__file__), 'todos.db')
+# Vercel のサーバーレス環境では /tmp のみ書き込み可能
+DB_PATH = '/tmp/todos.db' if os.environ.get('VERCEL') else os.path.join(os.path.dirname(__file__), 'todos.db')
 
 
 def get_db():
