@@ -8,6 +8,22 @@ app = Flask(__name__)
 # Vercel のサーバーレス環境では /tmp のみ書き込み可能
 DB_PATH = '/tmp/todos.db' if os.environ.get('VERCEL') else os.path.join(os.path.dirname(__file__), 'todos.db')
 
+# モジュールロード時にDB初期化（Vercel対応）
+def _ensure_db():
+    conn = sqlite3.connect(DB_PATH)
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS todos (
+            id        INTEGER PRIMARY KEY AUTOINCREMENT,
+            text      TEXT    NOT NULL,
+            done      INTEGER NOT NULL DEFAULT 0,
+            created_at TEXT   NOT NULL
+        )
+    """)
+    conn.commit()
+    conn.close()
+
+_ensure_db()
+
 
 def get_db():
     conn = sqlite3.connect(DB_PATH)
