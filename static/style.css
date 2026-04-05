@@ -1,0 +1,215 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', 'Hiragino Sans', sans-serif;
+  background: #f0f2f5;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 16px;
+}
+
+.container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  width: 100%;
+  max-width: 560px;
+  padding: 32px 28px;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 24px;
+  letter-spacing: 0.04em;
+}
+
+/* 追加フォーム */
+.add-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.add-form input[type="text"] {
+  flex: 1;
+  padding: 10px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.add-form input[type="text"]:focus {
+  border-color: #4f8ef7;
+}
+
+.add-form button {
+  padding: 10px 20px;
+  background: #4f8ef7;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.add-form button:hover {
+  background: #3a7ae0;
+}
+
+/* フィルター */
+.filters {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #f0f2f5;
+  padding-bottom: 12px;
+}
+
+.filters a {
+  text-decoration: none;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  color: #666;
+  transition: background 0.15s, color 0.15s;
+}
+
+.filters a:hover {
+  background: #f0f2f5;
+  color: #333;
+}
+
+.filters a.active {
+  background: #4f8ef7;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* タスク一覧 */
+.todo-list {
+  list-style: none;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 4px;
+  border-bottom: 1px solid #f0f2f5;
+  transition: background 0.1s;
+}
+
+.todo-item:hover {
+  background: #fafbfc;
+  border-radius: 6px;
+}
+
+.todo-item.done .todo-text {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+/* チェックボタン */
+.check-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid #d0d0d0;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #4f8ef7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.todo-item.done .check-btn {
+  background: #4f8ef7;
+  border-color: #4f8ef7;
+  color: #fff;
+}
+
+.check-btn:hover {
+  border-color: #4f8ef7;
+}
+
+.todo-text {
+  flex: 1;
+  font-size: 1rem;
+  color: #222;
+  word-break: break-word;
+}
+
+.todo-date {
+  font-size: 0.75rem;
+  color: #bbb;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* 削除ボタン */
+.del-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+
+.del-btn:hover {
+  color: #e05555;
+  background: #fff0f0;
+}
+
+.inline {
+  display: contents;
+}
+
+/* 空状態 */
+.empty {
+  text-align: center;
+  color: #bbb;
+  padding: 32px 0;
+  font-size: 0.95rem;
+}
+
+/* 完了済み削除ボタン */
+.clear-form {
+  margin-top: 16px;
+  text-align: right;
+}
+
+.clear-btn {
+  background: none;
+  border: 1px solid #e0c0c0;
+  color: #c06060;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.83rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.clear-btn:hover {
+  background: #fff0f0;
+  color: #e05555;
+}

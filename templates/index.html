@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODO</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>TODO</h1>
+
+    <!-- 追加フォーム -->
+    <form class="add-form" action="/add" method="post">
+      <input type="hidden" name="filter" value="{{ filter_mode }}">
+      <input type="text" name="text" placeholder="タスクを入力..." autofocus autocomplete="off">
+      <button type="submit">追加</button>
+    </form>
+
+    <!-- フィルター -->
+    <div class="filters">
+      <a href="/?filter=all"    class="{{ 'active' if filter_mode == 'all'    }}">すべて ({{ total }})</a>
+      <a href="/?filter=active" class="{{ 'active' if filter_mode == 'active' }}">未完了 ({{ remaining }})</a>
+      <a href="/?filter=done"   class="{{ 'active' if filter_mode == 'done'   }}">完了済み ({{ total - remaining }})</a>
+    </div>
+
+    <!-- タスク一覧 -->
+    <ul class="todo-list">
+      {% for todo in todos %}
+      <li class="todo-item {{ 'done' if todo.done }}">
+        <form action="/toggle/{{ todo.id }}" method="post" class="inline">
+          <input type="hidden" name="filter" value="{{ filter_mode }}">
+          <button type="submit" class="check-btn" title="完了/未完了を切り替え">
+            {% if todo.done %}&#10003;{% else %}&nbsp;{% endif %}
+          </button>
+        </form>
+        <span class="todo-text">{{ todo.text }}</span>
+        <span class="todo-date">{{ todo.created_at }}</span>
+        <form action="/delete/{{ todo.id }}" method="post" class="inline">
+          <input type="hidden" name="filter" value="{{ filter_mode }}">
+          <button type="submit" class="del-btn" title="削除">&#10005;</button>
+        </form>
+      </li>
+      {% else %}
+      <li class="empty">タスクがありません</li>
+      {% endfor %}
+    </ul>
+
+    <!-- 完了済みをまとめて削除 -->
+    {% if total - remaining > 0 %}
+    <form action="/clear_done" method="post" class="clear-form">
+      <button type="submit" class="clear-btn">完了済みをすべて削除</button>
+    </form>
+    {% endif %}
+  </div>
+</body>
+</html>
